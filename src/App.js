@@ -6,14 +6,16 @@ function App() {
     firstName:"",
     lastName:"",
     email:"",
-    country:""
+    country:"",
+    emailcheckboxComment:false,
+    notification:""
   });
 console.log(formData);
   function changeHandler(event){
       setFormData((formData)=>({
         ...formData,
-      [event.target.name] : event.target.value
-      }))
+      [event.target.name] : event.target.type==="checkbox" ? (event.target.checked) : (event.target.type==="radio" ? (event.target.checked) : event.target.value)
+      }));
   }
   return (
    <div>
@@ -47,15 +49,15 @@ console.log(formData);
       <div>
         <label>By Email</label>
         <div>
-          <input type="checkbox" name="emailcheckbox" id="comment"></input>
+          <input type="checkbox" value={formData.emailcheckboxComment} name="emailcheckboxComment" id="comment" onChange={changeHandler}></input>
           <label htmlFor="comment" >Comments</label>
         </div>
         <div>
-          <input type="checkbox" name="emailcheckbox" id="Candidates"></input>
+          <input type="checkbox" value="Candidates" name="emailcheckboxCandidates" id="Candidates"></input>
           <label htmlFor="Candidates" >Candidates</label>
         </div>
         <div>
-          <input type="checkbox" name="emailcheckbox" id="Offers"></input>
+          <input type="checkbox" value="Offers" name="emailcheckboxOffers" id="Offers"></input>
           <label htmlFor="Offers" >Offers</label>
         </div>
       </div>
@@ -64,13 +66,13 @@ console.log(formData);
         <div>
           push notifications
         </div>
-        <input type="radio" id="Everything"/>
-        <label htmlFor="Everything" >Everything</label>
+        <input type="radio" id="Everything" name="notification" onChange={changeHandler} />
+        <label htmlFor="Everything" name="Everything">Everything</label>
         <br/>
-        <input type="radio" id="same"/>
+        <input type="radio" id="same" name="notification" onChange={changeHandler}/>
         <label htmlFor="same" >same as email</label>
         <br/>
-        <input type="radio" id="notify"/>
+        <input type="radio" id="notify" name="notification" onChange={changeHandler}/>
         <label htmlFor="notify" >no such notify</label>
         <br/>
         <br/>

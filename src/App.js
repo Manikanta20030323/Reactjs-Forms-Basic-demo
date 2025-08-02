@@ -10,16 +10,21 @@ function App() {
     emailcheckboxComment:false,
     notification:""
   });
-console.log(formData);
+// console.log(formData);
   function changeHandler(event){
       setFormData((formData)=>({
         ...formData,
-      [event.target.name] : event.target.type==="checkbox" ? (event.target.checked) : (event.target.type==="radio" ? (event.target.checked) : event.target.value)
+      [event.target.name] : event.target.type==="checkbox" ? (event.target.checked)  : event.target.value
       }));
+  }
+
+  function submisision(event){
+    // event.preventDefault();
+    console.log(formData);
   }
   return (
    <div>
-    <form>
+    <form action={submisision}>
       <label>First Name</label>
       <br></br>
       <input type="text" name="firstName" placeholder="Enter your name" onChange={changeHandler} className="border"></input>
@@ -66,17 +71,19 @@ console.log(formData);
         <div>
           push notifications
         </div>
-        <input type="radio" id="Everything" name="notification" onChange={changeHandler} />
+        <input type="radio" id="Everything" name="notification" value="Everything" onChange={changeHandler} />
         <label htmlFor="Everything" name="Everything">Everything</label>
         <br/>
-        <input type="radio" id="same" name="notification" onChange={changeHandler}/>
+        <input type="radio" id="same" name="notification" value="SameAsEmial" onChange={changeHandler}/>
         <label htmlFor="same" >same as email</label>
         <br/>
-        <input type="radio" id="notify" name="notification" onChange={changeHandler}/>
+        <input type="radio" id="notify" value="NotNotification" name="notification" onChange={changeHandler}/>
         <label htmlFor="notify" >no such notify</label>
         <br/>
         <br/>
       </div>
+
+      <button type="submit">Save</button>
     </form>
    </div>
   );
